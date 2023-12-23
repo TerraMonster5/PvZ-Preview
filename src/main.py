@@ -45,6 +45,8 @@ class WorldMenu(State):
     def __init__(self, filename):
         super().__init__()
 
+        self.filename = filename
+
         self.__levelBtns = []
 
         with open(f"adventures/{filename}", "r") as file:
@@ -68,8 +70,14 @@ class WorldMenu(State):
         root.currentState = MainMenu()
 
 class LevelMenu(State):
-    def __init__(self):
+    def __init__(self, filename):
         super().__init__()
+
+        self.filename = filename
+    
+    def __switchBack(self):
+        self._frame.destroy()
+        root.currentState = WorldMenu(self.filename)
 
 root = Main()
 root.currentState = MainMenu()
