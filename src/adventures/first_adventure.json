@@ -1,0 +1,15 @@
+{
+    "name": "First Adventure",
+    "zombieIDs": {
+        "0": "Zombie"
+    },
+    "world1": {
+        "name": "World 1",
+        "1-1": {
+            "name": "1-1",
+            "zombies": [],
+            "waves": 0,
+            "flags": 0
+        }
+    }
+}
