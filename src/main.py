@@ -20,6 +20,11 @@ class State:
     def __init__(self):
         self.frame = tk.Frame(root)
         self.frame.pack()
+    
+    def _switchBack(self):
+        self.frame.destroy()
+        root.currentState.pop()
+        root.currentState.peek().frame.pack()
 
 class MainMenu(State):
     def __init__(self):
@@ -28,17 +33,17 @@ class MainMenu(State):
         self.__title = ttk.Label(self.frame, text="PvZ Preview")
         self.__title.grid(column=0, row=0)
 
-        worlds = [f.stem for f in pathlib.Path("adventures/").glob("*.json")]
+        adventures = [f.stem for f in pathlib.Path("adventures/").glob("*.json")]
         
-        self.__worldBtns = []
+        self.__adventureBtns = []
 
-        for i, path in enumerate(worlds):
+        for i, path in enumerate(adventures):
             with open(f"adventures/{path}.json", "r") as file: name = json.load(file)["name"]
-            self.__worldBtns.append(ttk.Button(self.frame, text=name, command=functools.partial(self.__switchAdventureMenu, f"{path}.json")))
-            self.__worldBtns[i].grid(column=0, row=i+1)
+            self.__adventureBtns.append(ttk.Button(self.frame, text=name, command=functools.partial(self.__switchAdventureMenu, f"{path}.json")))
+            self.__adventureBtns[i].grid(column=0, row=i+1)
 
         self.__quitBtn = ttk.Button(self.frame, text="Quit", command=root.destroy)
-        self.__quitBtn.grid(column=0, row=len(self.__worldBtns)+1)
+        self.__quitBtn.grid(column=0, row=len(self.__adventureBtns)+1)
     
     def __switchAdventureMenu(self, filename):
         self.frame.pack_forget()
@@ -50,7 +55,7 @@ class AdventureMenu(State):
 
         self._filename = filename
 
-        self.__levelBtns = []
+        self.__worldBtns = []
 
         with open(f"adventures/{filename}", "r") as file:
             jsondict = json.load(file)
@@ -62,16 +67,11 @@ class AdventureMenu(State):
             jsondict.pop("zombieIDs")
         
         for i, world in enumerate(jsondict.values()):
-            self.__levelBtns.append(ttk.Button(self.frame, text=world["name"], command=functools.partial(self.__switchWorldMenu, world)))
-            self.__levelBtns[i].grid(column=0, row=i+1)
+            self.__worldBtns.append(ttk.Button(self.frame, text=world["name"], command=functools.partial(self.__switchWorldMenu, world)))
+            self.__worldBtns[i].grid(column=0, row=i+1)
 
-        self.__backBtn = ttk.Button(self.frame, text="Back", command=self.__switchMain)
-        self.__backBtn.grid(column=0, row=len(self.__levelBtns)+1)
-    
-    def __switchMain(self):
-        self.frame.destroy()
-        root.currentState.pop()
-        root.currentState.peek().frame.pack()
+        self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
+        self.__backBtn.grid(column=0, row=len(self.__worldBtns)+1)
     
     def __switchWorldMenu(self, world):
         self.frame.pack_forget()
@@ -84,13 +84,30 @@ class WorldMenu(State):
         self.__title = ttk.Label(self.frame, text=world["name"])
         self.__title.grid(column=0, row=0)
 
-        self.__backBtn = ttk.Button(self.frame, text="Back", command=self.__switchBack)
-        self.__backBtn.grid(column=0, row=1)
+        world.pop("name")
+
+        self.__levelBtns = []
+
+        for i, level in enumerate(world.values()):
+            self.__levelBtns.append(ttk.Button(self.frame, text=level["name"], command=functools.partial(self.__switchLevelMenu, level)))
+            self.__levelBtns[i].grid(column=0, row=i+1)
+
+        self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
+        self.__backBtn.grid(column=0, row=len(self.__levelBtns)+1)
     
-    def __switchBack(self):
-        self.frame.destroy()
-        root.currentState.pop()
-        root.currentState.peek().frame.pack()
+    def __switchLevelMenu(self, level):
+        self.frame.pack_forget()
+        root.currentState.push(LevelMenu(level))
+
+class LevelMenu(State):
+    def __init__(self, level):
+        super().__init__()
+
+        self.__title = ttk.Label(self.frame, text=level["name"])
+        self.__title.grid(column=0, row=0)
+
+        self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
+        self.__backBtn.grid(column=0, row=1)
 
 root = Main()
 root.currentState.push(MainMenu())
