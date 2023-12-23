@@ -1,15 +1,275 @@
 {
     "name": "First Adventure",
     "zombieIDs": {
-        "0": "Zombie"
+        "0": "Zombie",
+        "1": "Flag",
+        "2": "Conehead",
+        "3": "Vaulter",
+        "4": "Buckethead",
+        "5": "Newspaper",
+        "6": "Screen-Door",
+        "7": "Footballer",
+        "8": "Dancer",
+        "9": "Backup Dancer",
+        "10": "Ducky-Tube",
+        "11": "Snorkel",
+        "12": "Zomboni",
+        "13": "Bobsled",
+        "14": "Dolphin",
+        "15": "Jack-in-the-Box",
+        "16": "Balloon",
+        "17": "Digger",
+        "18": "Pogo",
+        "19": "Yeti",
+        "20": "Bungee",
+        "21": "Ladder",
+        "22": "Catapult",
+        "23": "Gargantuar",
+        "24": "Imp"
     },
     "world1": {
         "name": "World 1",
         "1-1": {
             "name": "1-1",
-            "zombies": [],
-            "waves": 0,
-            "flags": 0
+            "zombies": [0],
+            "waves": 4
+        },
+        "1-2": {
+            "name": "1-2",
+            "zombies": [0],
+            "waves": 6
+        },
+        "1-3": {
+            "name": "1-3",
+            "zombies": [0,2],
+            "waves": 8
+        },
+        "1-4": {
+            "name": "1-4",
+            "zombies": [0,2],
+            "waves": 10
+        },
+        "1-6": {
+            "name": "1-6",
+            "zombies": [0,2,3],
+            "waves": 10
+        },
+        "1-7": {
+            "name": "1-7",
+            "zombies": [0,2,3],
+            "waves": 20
+        },
+        "1-8": {
+            "name": "1-8",
+            "zombies": [0,2,4],
+            "waves": 10
+        },
+        "1-9": {
+            "name": "1-9",
+            "zombies": [0,2,3,4],
+            "waves": 20
+        },
+        "1-10": {
+            "name": "1-10",
+            "zombies": [0,2,3,4],
+            "waves": 20
+        }
+    },
+    "world2": {
+        "name": "World 2",
+        "2-1": {
+            "name": "2-1",
+            "zombies": [0,5],
+            "waves": 10
+        },
+        "2-2": {
+            "name": "2-2",
+            "zombies": [0,2,4,5],
+            "waves": 20
+        },
+        "2-3": {
+            "name": "2-3",
+            "zombies": [0,2,6],
+            "waves": 10
+        },
+        "2-4": {
+            "name": "2-4",
+            "zombies": [0,2,3,6],
+            "waves": 20
+        },
+        "2-6": {
+            "name": "2-6",
+            "zombies": [0,2,7],
+            "waves": 10
+        },
+        "2-7": {
+            "name": "2-7",
+            "zombies": [0,2,6,7],
+            "waves": 20
+        },
+        "2-8": {
+            "name": "2-8",
+            "zombies": [0,2,8],
+            "waves": 10
+        },
+        "2-9": {
+            "name": "2-9",
+            "zombies": [0,2,6,8],
+            "waves": 20
+        },
+        "2-10": {
+            "name": "2-10",
+            "zombies": [0,2,6,7,8],
+            "waves": 20
+        }
+    },
+    "world3": {
+        "name": "World 3",
+        "3-1": {
+            "name": "3-1",
+            "zombies": [0,2],
+            "waves": 10
+        },
+        "3-2": {
+            "name": "3-2",
+            "zombies": [0,2,4,5,7],
+            "waves": 20
+        },
+        "3-3": {
+            "name": "3-3",
+            "zombies": [0,2,11],
+            "waves": 20
+        },
+        "3-4": {
+            "name": "3-4",
+            "zombies": [0,2,3,4,5,11],
+            "waves": 30
+        },
+        "3-5": {
+            "name": "3-5",
+            "zombies": [0,2,7,11],
+            "waves": 20
+        },
+        "3-6": {
+            "name": "3-6",
+            "zombies": [0,2,12,13],
+            "waves": 20
+        },
+        "3-7": {
+            "name": "3-7",
+            "zombies": [0,2,4,11,12,13],
+            "waves": 30
+        },
+        "3-8": {
+            "name": "3-8",
+            "zombies": [0,2,14],
+            "waves": 20
+        },
+        "3-9": {
+            "name": "3-9",
+            "zombies": [0,2,3,4,12,13,14],
+            "waves": 30
+        },
+        "3-10": {
+            "name": "3-10",
+            "zombies": [0,2,4,11,12,13,14],
+            "waves": 30
+        }
+    },
+    "world4": {
+        "name": "World 4",
+        "4-1": {
+            "name": "4-1",
+            "zombies": [0,2,15],
+            "waves": 10
+        },
+        "4-2": {
+            "name": "4-2",
+            "zombies": [0,2,7,15],
+            "waves": 20
+        },
+        "4-3": {
+            "name": "4-3",
+            "zombies": [0,2,16],
+            "waves": 10
+        },
+        "4-4": {
+            "name": "4-4",
+            "zombies": [0,2,14,16],
+            "waves": 20
+        },
+        "4-6": {
+            "name": "4-6",
+            "zombies": [0,2,17],
+            "waves": 10
+        },
+        "4-7": {
+            "name": "4-7",
+            "zombies": [0,2,4,15,17],
+            "waves": 20
+        },
+        "4-8": {
+            "name": "4-8",
+            "zombies": [0,2,18],
+            "waves": 10
+        },
+        "4-9": {
+            "name": "4-9",
+            "zombies": [0,2,4,16,18],
+            "waves": 20
+        },
+        "4-10": {
+            "name": "4-10",
+            "zombies": [0,2,4,15,16,17,18],
+            "waves": 20
+        }
+    },
+    "world5": {
+        "name": "World 5",
+        "5-1": {
+            "name": "5-1",
+            "zombies": [0,2,20],
+            "waves": 10
+        },
+        "5-2": {
+            "name": "5-2",
+            "zombies": [0,2,3,4,20],
+            "waves": 20
+        },
+        "5-3": {
+            "name": "5-3",
+            "zombies": [0,2,21],
+            "waves": 20
+        },
+        "5-4": {
+            "name": "5-4",
+            "zombies": [0,2,7,18,20,21],
+            "waves": 30
+        },
+        "5-5": {
+            "name": "5-5",
+            "zombies": [0,2,4,20],
+            "waves": 20
+        },
+        "5-6": {
+            "name": "5-6",
+            "zombies": [0,2,22],
+            "waves": 20
+        },
+        "5-7": {
+            "name": "5-7",
+            "zombies": [0,2,20,21,22],
+            "waves": 30
+        },
+        "5-8": {
+            "name": "5-8",
+            "zombies": [0,2,23],
+            "waves": 20
+        },
+        "5-9": {
+            "name": "5-9",
+            "zombies": [0,2,4,15,20,21,22,23],
+            "waves": 30
         }
     }
 }
