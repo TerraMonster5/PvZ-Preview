@@ -90,7 +90,7 @@ class WorldMenu(State):
             if key == "name":
                 continue
             self.__levelBtns.append(ttk.Button(self.frame, text=level["name"], command=functools.partial(self.__switchLevelMenu, level)))
-            self.__levelBtns[i].grid(column=0, row=i+1)
+            self.__levelBtns[i-1].grid(column=0, row=i)
 
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
         self.__backBtn.grid(column=0, row=len(self.__levelBtns)+1)
