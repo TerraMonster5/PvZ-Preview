@@ -109,8 +109,14 @@ class LevelMenu(State):
         self.__iterations = ttk.Spinbox(self.frame, from_=1, increment=1)
         self.__iterations.grid(column=1, row=1, sticky=tk.E)
 
+        self.__startBtn = ttk.Button(self.frame, text="Start", command=self.__runSim)
+        self.__startBtn.grid(column=1, row=2)
+
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
-        self.__backBtn.grid(column=0, row=2, columnspan=2)
+        self.__backBtn.grid(column=0, row=3, columnspan=2)
+    
+    def __runSim(self):
+        print(self.__iterations.get())
 
 root = Main()
 root.currentState.push(MainMenu())
