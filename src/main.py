@@ -106,13 +106,11 @@ class LevelMenu(State):
         self.__title = ttk.Label(self.frame, text=level["name"])
         self.__title.grid(column=0, row=0, columnspan=2)
 
-        ttk.Label(self.frame, text="Test")
-
         self.__iterations = ttk.Spinbox(self.frame, from_=1, increment=1)
-        self.__iterations.grid(column=1, row=1)
+        self.__iterations.grid(column=1, row=1, sticky=tk.E)
 
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
-        self.__backBtn.grid(column=0, row=1)
+        self.__backBtn.grid(column=0, row=2, columnspan=2)
 
 root = Main()
 root.currentState.push(MainMenu())
