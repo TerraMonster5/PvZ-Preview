@@ -84,11 +84,11 @@ class WorldMenu(State):
         self.__title = ttk.Label(self.frame, text=world["name"])
         self.__title.grid(column=0, row=0)
 
-        world.pop("name")
-
         self.__levelBtns = []
 
-        for i, level in enumerate(world.values()):
+        for i, (key, level) in enumerate(world.items()):
+            if key == "name":
+                continue
             self.__levelBtns.append(ttk.Button(self.frame, text=level["name"], command=functools.partial(self.__switchLevelMenu, level)))
             self.__levelBtns[i].grid(column=0, row=i+1)
 
