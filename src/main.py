@@ -1,6 +1,7 @@
 import pathlib
 import json
 import functools
+import math
 
 import structs
 
@@ -106,7 +107,7 @@ class LevelMenu(State):
         self.__title = ttk.Label(self.frame, text=level["name"])
         self.__title.grid(column=0, row=0, columnspan=2)
 
-        self.__iterations = ttk.Spinbox(self.frame, from_=1, increment=1)
+        self.__iterations = ttk.Spinbox(self.frame, from_=1, to=math.inf, increment=1)
         self.__iterations.grid(column=1, row=1, sticky=tk.E)
 
         self.__startBtn = ttk.Button(self.frame, text="Start", command=self.__runSim)
