@@ -130,6 +130,8 @@ class Calculator(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # When you need the master for a widget use self
+
 root = Main()
 root.currentState.push(MainMenu())
 root.mainloop()
