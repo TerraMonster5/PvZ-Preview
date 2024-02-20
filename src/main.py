@@ -7,6 +7,7 @@ import structs
 
 import tkinter as tk
 from tkinter import ttk
+from structs import stk
 
 class Main(tk.Tk):
     def __init__(self, *kwargs):
@@ -16,6 +17,12 @@ class Main(tk.Tk):
 
         self.geometry("600x600")
         self.title("PvZ Preview")
+
+        self.toolbar = stk.ToolBar(self, tearoff=0)
+        self.toolbar.add_cascade("file", menukw={"tearoff": 0}, cascadekw={"label": "File"})
+        self.toolbar.add_cascade("tools", menukw={"tearoff": 0}, cascadekw={"label": "Tools"})
+        self.toolbar.tools.add_command(label="Calculator", command=lambda: Calculator())
+        self.config(menu=self.toolbar)
 
 class State:
     def __init__(self):
@@ -118,6 +125,10 @@ class LevelMenu(State):
     
     def __runSim(self):
         print(self.__iterations.get())
+
+class Calculator(tk.Toplevel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 root = Main()
 root.currentState.push(MainMenu())
