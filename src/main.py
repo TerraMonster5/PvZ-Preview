@@ -21,7 +21,7 @@ class Main(tk.Tk):
         self.toolbar = stk.ToolBar(self, tearoff=0)
         self.toolbar.add_cascade("file", menukw={"tearoff": 0}, cascadekw={"label": "File"})
         self.toolbar.add_cascade("tools", menukw={"tearoff": 0}, cascadekw={"label": "Tools"})
-        self.toolbar.tools.add_command(label="Calculator", command=lambda: Calculator())
+        self.toolbar.tools.add_command(label="Calculator", command=lambda: Calculator()) # type: ignore
         self.config(menu=self.toolbar)
 
 class State:
