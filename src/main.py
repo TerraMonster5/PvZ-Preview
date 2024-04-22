@@ -137,7 +137,10 @@ class Calculator(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # When you need the master for a widget use self
+        with open("adventures/first_adventure.json", "r") as file:
+            jsonDict = json.load(file)
+
+        self.zombiesDropDown = ttk.Combobox(self, values=jsonDict.keys())
 
 root = Main()
 root.currentState.push(MainMenu())
