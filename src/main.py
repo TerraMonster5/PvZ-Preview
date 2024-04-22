@@ -10,25 +10,27 @@ from tkinter import ttk
 from structs import stk
 
 class Main(tk.Tk):
-    def __init__(self, *kwargs):
-        super().__init__(*kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         self.currentState = structs.SimpleStack()
 
+        self.iconbitmap("icon.ico")
         self.geometry("600x600")
         self.title("PvZ Preview")
 
         self.toolbar = stk.ToolBar(self, tearoff=0)
         self.toolbar.add_cascade("file", menukw={"tearoff": 0}, cascadekw={"label": "File"})
-        self.toolbar.file.add_command(label="Open", command=lambda: ...)
-        self.toolbar.file.add_command(label="Open recent", command=lambda: ...)
-        self.toolbar.file.add_separator()
-        self.toolbar.file.add_command(label="Save as", command=lambda: ...)
-        self.toolbar.file.add_separator()
-        self.toolbar.file.add_command(label="Close", command=lambda: ...)
-        self.toolbar.file.add_command(label="Exit", command=lambda: exit())
+        self.toolbar.file.add_command(label="Open", command=lambda: ...) # type: ignore
+        self.toolbar.file.add_command(label="Open recent", command=lambda: ...) # type: ignore
+        self.toolbar.file.add_separator() # type: ignore
+        self.toolbar.file.add_command(label="Save as", command=lambda: ...) # type: ignore
+        self.toolbar.file.add_separator() # type: ignore
+        self.toolbar.file.add_command(label="Close", command=lambda: ...) # type: ignore
+        self.toolbar.file.add_command(label="Exit", command=lambda: exit()) # type: ignore
         self.toolbar.add_cascade("tools", menukw={"tearoff": 0}, cascadekw={"label": "Tools"})
-        self.toolbar.tools.add_command(label="Calculator", command=lambda: Calculator()) # type: ignore
+        self.toolbar.tools.add_cascade("calculators", menukw={"tearoff": 0}, cascadekw={"label": "Calculators"}) # type: ignore
+        self.toolbar.tools.calculators.add_command(label="50% Rule", command=lambda: Calculator()) # type: ignore
         self.config(menu=self.toolbar)
 
 class State:
@@ -57,7 +59,7 @@ class MainMenu(State):
             self.__adventureBtns.append(ttk.Button(self.frame, text=name, command=functools.partial(self.__switchAdventureMenu, f"{path}.json")))
             self.__adventureBtns[i].grid(column=0, row=i+1)
 
-        self.__quitBtn = ttk.Button(self.frame, text="Quit", command=root.destroy)
+        self.__quitBtn = ttk.Button(self.frame, text="Exit", command=root.destroy)
         self.__quitBtn.grid(column=0, row=len(self.__adventureBtns)+1)
     
     def __switchAdventureMenu(self, filename):
@@ -137,10 +139,16 @@ class Calculator(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        with open("adventures/first_adventure.json", "r") as file:
+        self.iconbitmap("icon.ico")
+        self.title("50% Rule")
+
+        with open("zombieHealth.json", "r") as file:
             jsonDict = json.load(file)
 
-        self.zombiesDropDown = ttk.Combobox(self, values=jsonDict.keys())
+        self.zombiesDropDown = ttk.Combobox(self, state="readonly", values=list(jsonDict.keys()))
+        self.zombiesDropDown.grid(row=0, column=0)
+
+        self.mainloop()
 
 root = Main()
 root.currentState.push(MainMenu())
