@@ -30,7 +30,7 @@ class Main(tk.Tk):
         self.toolbar.file.add_command(label="Exit", command=lambda: exit()) # type: ignore
         self.toolbar.add_cascade("tools", menukw={"tearoff": 0}, cascadekw={"label": "Tools"})
         self.toolbar.tools.add_cascade("calculators", menukw={"tearoff": 0}, cascadekw={"label": "Calculators"}) # type: ignore
-        self.toolbar.tools.calculators.add_command(label="50% Rule", command=lambda: Calculator()) # type: ignore
+        self.toolbar.tools.calculators.add_command(label="50% Rule", command=lambda: FiftyPercent()) # type: ignore
         self.config(menu=self.toolbar)
 
 class State:
@@ -135,7 +135,7 @@ class LevelMenu(State):
     def __runSim(self):
         print(self.__iterations.get())
 
-class Calculator(tk.Toplevel):
+class FiftyPercent(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
