@@ -18,6 +18,7 @@ class Main(tk.Tk):
         self.iconbitmap("icon.ico")
         self.geometry("600x600")
         self.title("PvZ Preview")
+        self.config(padx="3p", pady="3p")
 
         self.__toolbar = stk.ToolBar(self, tearoff=0)
         self.__toolbar.add_cascade("file", menukw={"tearoff": 0}, cascadekw={"label": "File"})
@@ -141,6 +142,7 @@ class FiftyPercent(tk.Toplevel):
 
         self.iconbitmap("icon.ico")
         self.title("50% Rule")
+        self.config(padx="3p", pady="3p")
 
         with open("zombieHealth.json", "r") as file:
             jsondict = json.load(file)
@@ -151,8 +153,12 @@ class FiftyPercent(tk.Toplevel):
         self.__zombiesList = tk.LabelFrame(self, labelwidget=self.__zombiesDropDown)
         self.__zombiesList.grid(row=1, column=0)
 
-        for x in range(10):
-            ttk.Label(self.__zombiesList, text=f"Test {x}").grid(row=x, column=0)
+        choices = [tk.Label(self.__zombiesList, text=f"Test {x}") for x in range(8)]
+        [x.grid(row=c, column=0) for c, x in enumerate(choices)]
+
+        for x in range(8):
+            ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1).grid(row=x, column=1)
+            ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1).grid(row=x, column=2)
 
         self.mainloop()
 
