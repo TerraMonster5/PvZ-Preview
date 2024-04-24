@@ -150,15 +150,21 @@ class FiftyPercent(tk.Toplevel):
         ttk.Label(self, text="Zombies").grid(row=0, column=0)
 
         self.__zombiesDropDown = ttk.Combobox(self, state="readonly", values=list(jsondict.keys()))
-        self.__zombiesList = tk.LabelFrame(self, labelwidget=self.__zombiesDropDown)
-        self.__zombiesList.grid(row=1, column=0)
+        self.__zombiesList = tk.LabelFrame(self, labelwidget=self.__zombiesDropDown, padx="2p", pady="2p")
+        self.__zombiesList.grid(row=1, column=0, rowspan=9)
 
-        choices = [tk.Label(self.__zombiesList, text=f"Test {x}") for x in range(8)]
-        [x.grid(row=c, column=0) for c, x in enumerate(choices)]
+        self.__choices = [ttk.Label(self.__zombiesList, text=f"Test {x}") for x in range(8)]
+        [x.grid(row=c, column=0) for c, x in enumerate(self.__choices)]
 
-        for x in range(8):
-            ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1).grid(row=x, column=1)
-            ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1).grid(row=x, column=2)
+        self.__numFields = [[ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1), ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1)] for _ in range(8)]
+        [[wgt[c-1].grid(row=r, column=c) for c in range(1, 3)] for r, wgt in enumerate(self.__numFields)]
+
+        ttk.Label(self, text="Peas").grid(row=0, column=1)
+        ttk.Entry(self).grid(row=1, column=1)
+        ttk.Label(self, text="True Damage").grid(row=2, column=1)
+        ttk.Entry(self).grid(row=3, column=1)
+        ttk.Button(self, text="Calculate").grid(row=4, column=1)
+        ttk.Entry(self, state="disabled").grid(row=5, column=1)
 
         self.mainloop()
 
