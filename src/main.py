@@ -149,15 +149,22 @@ class FiftyPercent(tk.Toplevel):
 
         ttk.Label(self, text="Zombies").grid(row=0, column=0)
 
-        self.__zombiesDropDown = ttk.Combobox(self, state="readonly", values=list(jsondict.keys()))
+        self.__zombiesDropDown = ttk.Combobox(self, state="readonly", values=list(jsondict.keys()), width=15)
+        self.__zombiesDropDown.bind("<<ComboboxSelected>>", self.__addZombie)
         self.__zombiesList = tk.LabelFrame(self, labelwidget=self.__zombiesDropDown, padx="2p", pady="2p")
-        self.__zombiesList.grid(row=1, column=0, rowspan=9)
+        self.__zombiesList.grid(row=1, column=0, rowspan=10)
 
-        self.__choices = [ttk.Label(self.__zombiesList, text=f"Test {x}") for x in range(8)]
-        [x.grid(row=c, column=0) for c, x in enumerate(self.__choices)]
+        self.__free = 0
 
-        self.__numFields = [[ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1), ttk.Spinbox(self.__zombiesList, from_=0, to=math.inf, increment=1)] for _ in range(8)]
-        [[wgt[c-1].grid(row=r, column=c) for c in range(1, 3)] for r, wgt in enumerate(self.__numFields)]
+        ttk.Label(self.__zombiesList, text="Type").grid(row=0, column=0)
+        ttk.Label(self.__zombiesList, text="Alive").grid(row=0, column=1)
+        ttk.Label(self.__zombiesList, text="Dead").grid(row=0, column=2)
+
+        self.__choices = [ttk.Label(self.__zombiesList, text=f"", width=15) for _ in range(8)]
+        [x.grid(row=c+1, column=0) for c, x in enumerate(self.__choices)]
+
+        self.__numFields = [[ttk.Spinbox(self.__zombiesList, from_=0, to=99, increment=1, width=3) for _ in range(2)] for _ in range(8)]
+        [[wgt[c-1].grid(row=r+1, column=c) for c in range(1, 3)] for r, wgt in enumerate(self.__numFields)]
 
         ttk.Label(self, text="Peas").grid(row=0, column=1)
         ttk.Entry(self).grid(row=1, column=1)
@@ -167,6 +174,11 @@ class FiftyPercent(tk.Toplevel):
         ttk.Entry(self, state="disabled").grid(row=5, column=1)
 
         self.mainloop()
+
+    def __addZombie(self, event):
+        if self.__free < len(self.__choices) and not self.__zombiesDropDown.get() in map(lambda x: x["text"], self.__choices):
+            self.__choices[self.__free].config(text=self.__zombiesDropDown.get())
+            self.__free += 1
 
 root = Main()
 root.currentState.push(MainMenu())
