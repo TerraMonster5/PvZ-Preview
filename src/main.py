@@ -122,16 +122,16 @@ class LevelMenu(State):
         super().__init__()
 
         self.__title = ttk.Label(self.frame, text=level["name"])
-        self.__title.grid(column=0, row=0, columnspan=2)
+        self.__title.pack()
 
         self.__iterations = ttk.Spinbox(self.frame, from_=1, to=math.inf, increment=1)
-        self.__iterations.grid(column=1, row=1, sticky=tk.E)
+        self.__iterations.pack()
 
         self.__startBtn = ttk.Button(self.frame, text="Start", command=self.__runSim)
-        self.__startBtn.grid(column=1, row=2)
+        self.__startBtn.pack()
 
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
-        self.__backBtn.grid(column=0, row=3, columnspan=2)
+        self.__backBtn.pack()
     
     def __runSim(self):
         print(self.__iterations.get())
