@@ -1,3 +1,5 @@
+import functools
+
 import tkinter as tk
 from tkinter import ttk
 
@@ -25,6 +27,7 @@ class ZombieSelector(tk.LabelFrame):
         ttk.Label(self, text="Alive").grid(row=0, column=1)
         ttk.Label(self, text="Dead").grid(row=0, column=2)
 
+        self.__buttonRef = dict()
         self.__records = [[] for _ in range(max)]
         self.__free = 0
 
@@ -51,16 +54,38 @@ class ZombieSelector(tk.LabelFrame):
                                                    relief="flat",
                                                    overrelief="flat",
                                                    bd=0,
-                                                   width=10))
+                                                   width=10,
+                                                   command=functools.partial(self.__removeZombie, new)))
         for col in range(4):
             self.__records[self.__free][col].grid(row=self.__free+1, column=col)
 
-        print(self.__records)
+        self.__buttonRef[new] = self.__free
 
         self.__free += 1
 
-    def __removeZombie(self, row: int) -> None:
-        pass
+    def __removeZombie(self, name: str) -> None:
+        row = self.__buttonRef[name]
+
+        for wgt in self.__records[row]:
+            wgt.destroy()
+
+        self.__records.pop(row)
+        self.__records.append([])
+
+        self.__buttonRef.pop(name)
+
+        for i, n in enumerate(self.__buttonRef.keys()):
+            self.__buttonRef[n] = i
+
+        for r in self.__records:
+            for wgt in r:
+                wgt.grid_forget()
+        
+        for r, lst in enumerate(self.__records):
+            for c, wgt in enumerate(lst):
+                wgt.grid(row=r+1, column=c)
+        
+        self.__free -= 1
 
     def __getRecords(self):
         pass
