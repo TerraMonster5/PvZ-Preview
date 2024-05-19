@@ -137,6 +137,7 @@ class LevelMenu(State):
     def __runSim(self):
         print(self.__iterations.get())
 
-root = Main()
-root.currentState.push(MainMenu())
-root.mainloop()
+if __name__ == "__main__":
+    root = Main()
+    root.currentState.push(MainMenu())
+    root.mainloop()
