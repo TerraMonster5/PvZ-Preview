@@ -94,8 +94,8 @@ class ZombieSelector(tk.LabelFrame):
             messagebox.showerror("Error", "No zombies have been selected!")
             return
 
-        if not all(map(lambda x: x.get(), itertools.chain(*[record[1:3] for record in self.__records if len(record) > 0]))):
+        if not all(map(lambda x: x.get().isdigit(), itertools.chain(*[record[1:3] for record in self.__records if len(record) > 0]))):
             messagebox.showwarning("Warning", "One or more fields have not been filled.")
             return
 
-        return {record[0]["text"]: list(map(lambda x: x.get(), record[1:3])) for record in self.__records if len(record) > 0}
+        return {record[0]["text"]: list(map(lambda x: int(x.get()), record[1:3])) for record in self.__records if len(record) > 0}
