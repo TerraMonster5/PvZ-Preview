@@ -8,8 +8,9 @@ from tkinter import ttk
 from structs import stk
 
 class FiftyPercent(tk.Toplevel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, cnf={}, **kwargs):
+        kwargs = cnf or kwargs
+        super().__init__(**kwargs)
 
         self.iconbitmap("assets/icon.ico")
         self.title("50% Rule")
