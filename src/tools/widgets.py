@@ -1,7 +1,9 @@
 import functools
+import itertools
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 class ZombieSelector(tk.LabelFrame):
     def __init__(self,
@@ -88,4 +90,12 @@ class ZombieSelector(tk.LabelFrame):
         self.__free -= 1
 
     def getRecords(self):
+        if len(self.__buttonRef) == 0:
+            messagebox.showerror("Error", "No zombies have been selected!")
+            return
+
+        if not all(map(lambda x: x.get(), itertools.chain(*[record[1:3] for record in self.__records if len(record) > 0]))):
+            messagebox.showwarning("Warning", "One or more fields have not been filled.")
+            return
+
         return {record[0]["text"]: list(map(lambda x: x.get(), record[1:3])) for record in self.__records if len(record) > 0}
