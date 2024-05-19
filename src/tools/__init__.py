@@ -2,7 +2,7 @@ import json
 import tkinter as tk
 from tkinter import ttk
 
-import widgets
+import tools.widgets
 
 from structs import stk
 

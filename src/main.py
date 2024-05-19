@@ -74,8 +74,6 @@ class AdventureMenu(State):
     def __init__(self, filename):
         super().__init__()
 
-        self._filename = filename
-
         self.__worldBtns = []
 
         with open(f"adventures/{filename}", "r") as file:
