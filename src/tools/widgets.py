@@ -87,5 +87,5 @@ class ZombieSelector(tk.LabelFrame):
         
         self.__free -= 1
 
-    def __getRecords(self):
-        pass
+    def getRecords(self):
+        return {record[0]["text"]: list(map(lambda x: x.get(), record[1:3])) for record in self.__records if len(record) > 0}
