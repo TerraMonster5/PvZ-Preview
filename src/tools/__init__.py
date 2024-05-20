@@ -67,8 +67,6 @@ class FiftyPercent(tk.Toplevel):
         if selected == {}:
             return
         
-        print(self.__peasDmgEntry["state"])
-        
         if self.__peasDmgEntry["state"] == self.__trueDmgEntry["state"] == "enabled":
             messagebox.showwarning("Warning", "No damage input.")
             return
