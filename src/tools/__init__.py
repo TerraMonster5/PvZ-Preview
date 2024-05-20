@@ -9,7 +9,7 @@ from tkinter import messagebox
 from structs import stk
 
 class FiftyPercent(tk.Toplevel):
-    def __init__(self, cnf={}, **kwargs):
+    def __init__(self, cnf: dict={}, **kwargs) -> None:
         kwargs = cnf or kwargs
         super().__init__(**kwargs)
 
@@ -92,7 +92,7 @@ class FiftyPercent(tk.Toplevel):
         else:
             self.__chanceVar.set(str(round(((percentage-0.35)/0.15)*100, 2))+"%")
     
-    def __lockFields(self, event):
+    def __lockFields(self, event) -> None:
         selected = self.__selector.getSelected()
 
         if self.__peasDmgEntry.get() and any(zombie in selected for zombie in ("Newspaper", "Screen-Door", "Ladder")):

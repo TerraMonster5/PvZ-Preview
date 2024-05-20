@@ -12,7 +12,7 @@ from tkinter import ttk
 from structs import stk
 
 class Main(tk.Tk):
-    def __init__(self, cnf={}, **kwargs):
+    def __init__(self, cnf: dict={}, **kwargs) -> None:
         kwargs = cnf or kwargs
         super().__init__(**kwargs)
 
@@ -39,17 +39,17 @@ class Main(tk.Tk):
         self.config(menu=self.__toolbar)
 
 class State:
-    def __init__(self):
+    def __init__(self) -> None:
         self.frame = tk.Frame(root)
         self.frame.pack()
     
-    def _switchBack(self):
+    def _switchBack(self) -> None:
         self.frame.destroy()
         root.currentState.pop()
         root.currentState.peek().frame.pack()
 
 class MainMenu(State):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.__title = ttk.Label(self.frame, text="PvZ Preview")
@@ -72,7 +72,7 @@ class MainMenu(State):
         root.currentState.push(AdventureMenu(filename))
 
 class AdventureMenu(State):
-    def __init__(self, filename):
+    def __init__(self, filename: str) -> None:
         super().__init__()
 
         self.__worldBtns = []
@@ -93,12 +93,12 @@ class AdventureMenu(State):
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
         self.__backBtn.grid(column=0, row=len(self.__worldBtns)+1)
     
-    def __switchWorldMenu(self, world):
+    def __switchWorldMenu(self, world: dict) -> None:
         self.frame.pack_forget()
         root.currentState.push(WorldMenu(world))
 
 class WorldMenu(State):
-    def __init__(self, world):
+    def __init__(self, world: dict) -> None:
         super().__init__()
 
         self.__title = ttk.Label(self.frame, text=world["name"])
@@ -115,12 +115,12 @@ class WorldMenu(State):
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
         self.__backBtn.grid(column=0, row=len(self.__levelBtns)+1)
     
-    def __switchLevelMenu(self, level):
+    def __switchLevelMenu(self, level: dict) -> None:
         self.frame.pack_forget()
         root.currentState.push(LevelMenu(level))
 
 class LevelMenu(State):
-    def __init__(self, level):
+    def __init__(self, level: dict) -> None:
         super().__init__()
 
         self.__title = ttk.Label(self.frame, text=level["name"])
@@ -135,7 +135,7 @@ class LevelMenu(State):
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
         self.__backBtn.pack()
     
-    def __runSim(self):
+    def __runSim(self) -> None:
         print(self.__iterations.get())
 
 if __name__ == "__main__":

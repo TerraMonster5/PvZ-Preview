@@ -10,7 +10,7 @@ class ZombieSelector(tk.LabelFrame):
                  master,
                  options: list=[],
                  max: int=10,
-                 cnf={},
+                 cnf: dict={},
                  **kwargs) -> None:
         kwargs = cnf or kwargs
 
@@ -94,7 +94,7 @@ class ZombieSelector(tk.LabelFrame):
 
         self.event_generate("<<SelectedChanged>>")
 
-    def getRecords(self):
+    def getRecords(self) -> dict:
         if len(self.__buttonRef) == 0:
             messagebox.showerror("Error", "No zombies have been selected!")
             return {}
@@ -105,8 +105,8 @@ class ZombieSelector(tk.LabelFrame):
 
         return {record[0]["text"]: list(map(lambda x: int(x.get()), record[1:3])) for record in self.__records if len(record) > 0}
     
-    def getSelected(self):
+    def getSelected(self) -> list:
         if len(self.__buttonRef) > 0:
-            return self.__buttonRef.keys()
+            return list(self.__buttonRef.keys())
         
         return []
