@@ -4,6 +4,7 @@ import math
 import json
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 from structs import stk
 
@@ -28,14 +29,17 @@ class FiftyPercent(tk.Toplevel):
         ttk.Label(self, text="Zombies").grid(row=0, column=0)
 
         self.__selector = widgets.ZombieSelector(self, options=list(self.__healthDict.keys()), max=8)
+        self.__selector.bind("<<SelectedChanged>>", self.__lockPeas)
         self.__selector.grid(row=1, rowspan=10, column=0, padx="2p", pady="2p", ipadx="1p", ipady="1p", sticky=tk.N)
 
         ttk.Label(self, text="Peas").grid(row=0, column=1)
         self.__peasDmgEntry = ttk.Entry(self)
+        self.__peasDmgEntry.bind("<KeyRelease>", self.__lockTrue)
         self.__peasDmgEntry.grid(row=1, column=1, pady="2p")
 
         ttk.Label(self, text="True Damage").grid(row=2, column=1)
         self.__trueDmgEntry = ttk.Entry(self)
+        self.__trueDmgEntry.bind("<KeyRelease>", self.__lockPeas)
         self.__trueDmgEntry.grid(row=3, column=1, pady="2p")
 
         ttk.Button(self, text="Calculate", command=lambda: self.__calculate()).grid(row=4, column=1)
@@ -58,6 +62,9 @@ class FiftyPercent(tk.Toplevel):
         self.mainloop()
     
     def __calculate(self) -> None:
+        if self.__peasDmgEntry["state"] == self.__trueDmgEntry["state"] == "disabled":
+            messagebox.showerror("Error", "")
+
         selected = self.__selector.getRecords()
         if selected is None:
             return
@@ -79,3 +86,16 @@ class FiftyPercent(tk.Toplevel):
             self.__chanceVar.set("100%")
         else:
             self.__chanceVar.set(str(round(((percentage-0.35)/0.15)*100, 2))+"%")
+    
+    def __lockPeas(self, event):
+        selected = self.__selector.getSelected()
+        if self.__trueDmgEntry.get() or any(zombie in selected for zombie in ("Newspaper", "Screen-Door", "Ladder")):
+            self.__peasDmgEntry.config(state="disabled")
+        else:
+            self.__peasDmgEntry.config(state="enabled")
+
+    def __lockTrue(self, event):
+        if self.__peasDmgEntry.get():
+            self.__trueDmgEntry.config(state="disabled")
+        else:
+            self.__trueDmgEntry.config(state="enabled")

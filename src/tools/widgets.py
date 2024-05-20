@@ -36,6 +36,7 @@ class ZombieSelector(tk.LabelFrame):
         self.__cancelIcon = tk.PhotoImage(file="assets/close.png").subsample(4, 4)
     
     def __addZombie(self, event) -> None:
+
         if self.__free >= self.__max:
             return
         
@@ -65,6 +66,8 @@ class ZombieSelector(tk.LabelFrame):
 
         self.__free += 1
 
+        self.event_generate("<<SelectedChanged>>")
+
     def __removeZombie(self, name: str) -> None:
         row = self.__buttonRef[name]
 
@@ -89,13 +92,21 @@ class ZombieSelector(tk.LabelFrame):
         
         self.__free -= 1
 
+        self.event_generate("<<SelectedChanged>>")
+
     def getRecords(self):
         if len(self.__buttonRef) == 0:
             messagebox.showerror("Error", "No zombies have been selected!")
-            return
+            return {}
 
         if not all(map(lambda x: x.get().isdigit(), itertools.chain(*[record[1:3] for record in self.__records if len(record) > 0]))):
             messagebox.showwarning("Warning", "One or more fields have not been filled.")
-            return
+            return {}
 
         return {record[0]["text"]: list(map(lambda x: int(x.get()), record[1:3])) for record in self.__records if len(record) > 0}
+    
+    def getSelected(self):
+        if len(self.__buttonRef) > 0:
+            return self.__buttonRef.keys()
+        
+        return []
