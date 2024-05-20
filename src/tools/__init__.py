@@ -62,16 +62,23 @@ class FiftyPercent(tk.Toplevel):
         self.mainloop()
     
     def __calculate(self) -> None:
-        if self.__peasDmgEntry["state"] == self.__trueDmgEntry["state"] == "disabled":
-            messagebox.showerror("Error", "")
 
         selected = self.__selector.getRecords()
-        if selected is None:
+        if selected == {}:
             return
         
-        trueDmg = int(self.__peasDmgEntry.get())*20
+        print(self.__peasDmgEntry["state"])
         
-        #trueDmg = int(self.__trueDmgEntry.get())
+        if self.__peasDmgEntry["state"] == self.__trueDmgEntry["state"] == "enabled":
+            messagebox.showwarning("Warning", "No damage input.")
+            return
+        
+        if self.__peasDmgEntry["state"] == "enabled":
+            trueDmg = int(self.__peasDmgEntry.get())*20
+        
+        if self.__trueDmgEntry["state"] == "enabled":
+            trueDmg = int(self.__trueDmgEntry.get())
+
         deadHealth = sum((sum(self.__healthDict[key][x] for x in range(0, 3, 2))+self.__healthDict[key][1]*0.2)*value[1] for key, value in selected.items())
         totalHealth = sum((sum(self.__healthDict[key][x] for x in range(0, 3, 2))+self.__healthDict[key][1]*0.2)*sum(value) for key, value in selected.items())
 
@@ -96,7 +103,6 @@ class FiftyPercent(tk.Toplevel):
             self.__trueDmgEntry.config(state="disabled")
         else:
             self.__trueDmgEntry.config(state="enabled")
-
 
         if self.__trueDmgEntry.get() or any(zombie in selected for zombie in ("Newspaper", "Screen-Door", "Ladder")):
             self.__peasDmgEntry.config(state="disabled")
