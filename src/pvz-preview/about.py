@@ -16,10 +16,11 @@ class About(tk.Toplevel, abstracts.Singleton):
         kwargs = cnf or kwargs
         super().__init__(**kwargs)
 
+        self.iconbitmap("assets/icon.ico")
         self.title("About")
         self.resizable(False, False)
 
-        ttk.Label(self, text="Version: 0.1.5").pack()
+        ttk.Label(self, text="Version: 0.1.7").pack()
         ttk.Button(self, text="License", command=lambda: License.show(master=self)).pack()
 
 class License(tk.Toplevel, abstracts.Singleton):
@@ -35,6 +36,7 @@ class License(tk.Toplevel, abstracts.Singleton):
         kwargs = cnf or kwargs
         super().__init__(**kwargs)
 
+        self.iconbitmap("assets/icon.ico")
         self.title("GNU General Public License | Version 3")
         self.resizable(False, False)
 
