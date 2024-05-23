@@ -25,10 +25,10 @@ class Main(tk.Tk):
 
         self.__toolbar = stk.ToolBar(self, tearoff=0)
         self.__toolbar.add_cascade("file", menukw={"tearoff": 0}, cascadekw={"label": "File"})
-        self.__toolbar.file.add_command(label="Open", command=lambda: ...) # type: ignore
-        self.__toolbar.file.add_command(label="Open recent", command=lambda: ...) # type: ignore
+        self.__toolbar.file.add_command(label="Open", state="disabled", command=lambda: ...) # type: ignore
+        self.__toolbar.file.add_command(label="Open recent", state="disabled", command=lambda: ...) # type: ignore
         self.__toolbar.file.add_separator() # type: ignore
-        self.__toolbar.file.add_command(label="Save as", command=lambda: ...) # type: ignore
+        self.__toolbar.file.add_command(label="Save as", state="disabled", command=lambda: ...) # type: ignore
         self.__toolbar.file.add_separator() # type: ignore
         self.__toolbar.file.add_command(label="Close", command=lambda: ...) # type: ignore
         self.__toolbar.file.add_command(label="Exit", command=lambda: exit()) # type: ignore
