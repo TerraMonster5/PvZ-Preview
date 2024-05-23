@@ -1,4 +1,5 @@
 from . import widgets
+from ..about import About
 
 from structs import stk
 
@@ -21,6 +22,8 @@ class FiftyPercent(tk.Toplevel):
         self.__toolbar.add_cascade("file", menukw={"tearoff": 0}, cascadekw={"label": "File"})
         self.__toolbar.file.add_command(label="Close", command=lambda: self.destroy()) # type: ignore
         self.__toolbar.file.add_command(label="Exit", command=lambda: exit()) # type: ignore
+        self.__toolbar.add_cascade("help", menukw={"tearoff": 0}, cascadekw={"label": "Help"})
+        self.__toolbar.help.add_command(label="About", command=lambda: About.show()) # type: ignore
         self.config(menu=self.__toolbar)
 
         with open("zombieHealth.json", "r") as file:
@@ -58,8 +61,6 @@ class FiftyPercent(tk.Toplevel):
         self.__chanceVar = tk.StringVar()
         self.__chanceOutput = ttk.Entry(self, state="readonly", textvariable=self.__chanceVar)
         self.__chanceOutput.grid(row=10, column=1, pady="2p")
-
-        self.mainloop()
     
     def __calculate(self) -> None:
 

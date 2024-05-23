@@ -36,7 +36,7 @@ class Main(tk.Tk):
         self.__toolbar.tools.add_cascade("calculators", menukw={"tearoff": 0}, cascadekw={"label": "Calculators"}) # type: ignore
         self.__toolbar.tools.calculators.add_command(label="50% Rule", command=lambda: tools.FiftyPercent()) # type: ignore
         self.__toolbar.add_cascade("help", menukw={"tearoff": 0}, cascadekw={"label": "Help"})
-        self.__toolbar.help.add_command(label="About", command=lambda: about.About()) # type: ignore
+        self.__toolbar.help.add_command(label="About", command=lambda: about.About.show()) # type: ignore
         self.config(menu=self.__toolbar)
 
 class State:
