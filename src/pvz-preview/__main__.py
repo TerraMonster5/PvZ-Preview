@@ -1,22 +1,23 @@
-import tools
+from . import tools
+from . import about
+
+import structs
+from structs import stk
 
 import pathlib
 import json
 import functools
 import math
 
-import structs
-
 import tkinter as tk
 from tkinter import ttk
-from structs import stk
 
 class Main(tk.Tk):
     def __init__(self, cnf: dict={}, **kwargs) -> None:
         kwargs = cnf or kwargs
         super().__init__(**kwargs)
 
-        self.currentState = structs.SimpleStack()
+        self.currentState = structs.Stack()
 
         self.iconbitmap("assets/icon.ico")
         self.geometry("600x600")
@@ -35,7 +36,7 @@ class Main(tk.Tk):
         self.__toolbar.tools.add_cascade("calculators", menukw={"tearoff": 0}, cascadekw={"label": "Calculators"}) # type: ignore
         self.__toolbar.tools.calculators.add_command(label="50% Rule", command=lambda: tools.FiftyPercent()) # type: ignore
         self.__toolbar.add_cascade("help", menukw={"tearoff": 0}, cascadekw={"label": "Help"})
-        self.__toolbar.help.add_command(label="About", command=lambda: ...) # type: ignore
+        self.__toolbar.help.add_command(label="About", command=lambda: about.About()) # type: ignore
         self.config(menu=self.__toolbar)
 
 class State:

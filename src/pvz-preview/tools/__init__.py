@@ -1,12 +1,12 @@
 from . import widgets
 
+from structs import stk
+
 import math
 import json
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-
-from structs import stk
 
 class FiftyPercent(tk.Toplevel):
     def __init__(self, cnf: dict={}, **kwargs) -> None:
