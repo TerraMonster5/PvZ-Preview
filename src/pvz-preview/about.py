@@ -20,7 +20,7 @@ class About(tk.Toplevel, abstracts.Singleton):
         self.title("About")
         self.resizable(False, False)
 
-        ttk.Label(self, text="Version: 0.1.8").pack()
+        ttk.Label(self, text="Version: 0.1.9").pack()
         ttk.Button(self, text="License", command=lambda: License.show(master=self)).pack()
 
 class License(tk.Toplevel, abstracts.Singleton):
@@ -47,4 +47,4 @@ class License(tk.Toplevel, abstracts.Singleton):
 
         scrollbar = ttk.Scrollbar(self, orient="vertical", command=field.yview)
         field.config(yscrollcommand=scrollbar.set, state="disabled")
-        scrollbar.place(relx=1, rely=0, relheight=1, anchor=tk.NE)
+        scrollbar.place(relx=1, rely=0, relheight=1, anchor="ne")
