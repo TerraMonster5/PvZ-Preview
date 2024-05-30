@@ -1,13 +1,12 @@
 from . import globals
-from . import states
 from . import tools
 from . import about
+from . import states
 
 import structs
 from structs import stk
 
 import tkinter as tk
-from tkinter import ttk
 
 class Main(tk.Tk):
     def __init__(self, cnf: dict={}, **kwargs) -> None:

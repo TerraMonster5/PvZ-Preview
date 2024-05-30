@@ -1,5 +1,5 @@
 from . import widgets
-from ..about import About
+from .. import about
 
 from structs import stk
 
@@ -23,7 +23,7 @@ class FiftyPercent(tk.Toplevel):
         self.__toolbar.file.add_command(label="Close", command=lambda: self.destroy()) # type: ignore
         self.__toolbar.file.add_command(label="Exit", command=lambda: exit()) # type: ignore
         self.__toolbar.add_cascade("help", menukw={"tearoff": 0}, cascadekw={"label": "Help"})
-        self.__toolbar.help.add_command(label="About", command=lambda: About.show()) # type: ignore
+        self.__toolbar.help.add_command(label="About", command=lambda: about.About.show()) # type: ignore
         self.config(menu=self.__toolbar)
 
         with open("zombieHealth.json", "r") as file:
