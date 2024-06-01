@@ -1,4 +1,4 @@
-from .. import globals
+from .. import globals as glbls
 
 import pathlib
 import json
@@ -9,13 +9,13 @@ from tkinter import ttk
 
 class State:
     def __init__(self) -> None:
-        self.frame = tk.Frame(globals.root)
+        self.frame = tk.Frame(glbls.root)
         self.frame.pack()
 
     def _switchBack(self) -> None:
         self.frame.destroy()
-        globals.root.currentState.pop()
-        globals.root.currentState.peek().frame.pack()
+        glbls.root.currentState.pop()
+        glbls.root.currentState.peek().frame.pack()
 
 from .levelMenu import LevelMenu
 
@@ -40,7 +40,7 @@ class MainMenu(State):
 
     def __switchAdventureMenu(self, filename):
         self.frame.pack_forget()
-        globals.root.currentState.push(AdventureMenu(filename))
+        glbls.root.currentState.push(AdventureMenu(filename))
 
 class AdventureMenu(State):
     def __init__(self, filename: str) -> None:
@@ -66,7 +66,7 @@ class AdventureMenu(State):
 
     def __switchWorldMenu(self, world: dict) -> None:
         self.frame.pack_forget()
-        globals.root.currentState.push(WorldMenu(world))
+        glbls.root.currentState.push(WorldMenu(world))
 
 class WorldMenu(State):
     def __init__(self, world: dict) -> None:
@@ -88,4 +88,4 @@ class WorldMenu(State):
 
     def __switchLevelMenu(self, level: dict) -> None:
         self.frame.pack_forget()
-        globals.root.currentState.push(LevelMenu(level))
+        glbls.root.currentState.push(LevelMenu(level))

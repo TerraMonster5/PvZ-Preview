@@ -1,4 +1,4 @@
-from . import globals
+from . import globals as glbls
 from . import tools
 from . import about
 from . import states
@@ -37,6 +37,6 @@ class Main(tk.Tk):
         self.config(menu=self.__toolbar)
 
 if __name__ == "__main__":
-    globals.root = Main()
-    globals.root.currentState.push(states.MainMenu())
-    globals.root.mainloop()
+    glbls.root = Main()
+    glbls.root.currentState.push(states.MainMenu())
+    glbls.root.mainloop()
