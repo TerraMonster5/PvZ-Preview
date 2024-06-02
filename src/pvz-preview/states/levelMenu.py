@@ -40,6 +40,7 @@ class LevelMenu(State):
 
         for i in range(iterations):
             pvz.set_internal_spawn(copy.deepcopy(IDs))
+            pvz.Sleep(2)
 
             zombies = list(pvz.ReadMemory("int", 0x6a9ec0, 0x768, 0x6b4, array=waves*50))
 
@@ -63,7 +64,7 @@ class LevelMenu(State):
                 zombieDead = pvz.ReadMemory("bool", zombiesOffset + 0xec + j * 0x15c) # type: ignore
                 if not zombieDead:
                     zombieType = pvz.ReadMemory("int", zombiesOffset + 0x24 + j * 0x15c) # type: ignore
-                    preview.append((int)(zombieType)) # type: ignore
+                    preview.append(int(zombieType)) # type: ignore
 
             for k, val in enumerate(IDs):
                 df.loc[i, previewNames[k]] = preview.count(val)
