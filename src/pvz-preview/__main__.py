@@ -14,6 +14,7 @@ class Main(tk.Tk):
         super().__init__(**kwargs)
 
         self.currentState = structs.Stack()
+        self.zombieIDs = {}
 
         self.iconbitmap("assets/icon.ico")
         self.geometry("600x600")

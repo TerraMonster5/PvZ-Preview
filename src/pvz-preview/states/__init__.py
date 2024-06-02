@@ -31,16 +31,23 @@ class MainMenu(State):
         self.__adventureBtns = []
 
         for i, path in enumerate(adventures):
-            with open(f"adventures/{path}.json", "r") as file: name = json.load(file)["name"]
+            with open(f"adventures/{path}.json", "r") as file:
+                self.__jsonDict = json.load(file)
+                name = self.__jsonDict["name"]
             self.__adventureBtns.append(ttk.Button(self.frame, text=name, command=functools.partial(self.__switchAdventureMenu, f"{path}.json")))
             self.__adventureBtns[i].grid(column=0, row=i+1)
 
-        self.__quitBtn = ttk.Button(self.frame, text="Exit", command=globals.root.destroy)
+        self.__quitBtn = ttk.Button(self.frame, text="Exit", command=glbls.root.destroy)
         self.__quitBtn.grid(column=0, row=len(self.__adventureBtns)+1)
 
     def __switchAdventureMenu(self, filename):
         self.frame.pack_forget()
+        glbls.root.zombieIDs = {int(key): value for key, value in self.__jsonDict["zombieIDs"].items()}
         glbls.root.currentState.push(AdventureMenu(filename))
+    
+    def _switchBack(self) -> None:
+        glbls.root.zombieIDs = {}
+        super()._switchBack()
 
 class AdventureMenu(State):
     def __init__(self, filename: str) -> None:
