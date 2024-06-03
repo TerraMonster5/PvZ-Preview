@@ -27,6 +27,10 @@ class LevelMenu(State):
     def __runSim(self) -> None:
         import pvz
 
+        name = self.__level["name"]
+
+        levelID = (int(name.split("-")[0])-1)*10+int(name.split("-")[1])
+
         iterations = int(self.__iterations.get())
         IDs = self.__level["zombies"]
         waves = self.__level["waves"]
@@ -36,6 +40,8 @@ class LevelMenu(State):
         df = pd.DataFrame(index=range(iterations),
                           columns=list(zombieNames+previewNames),
                           dtype=float)
+        
+        pvz.WriteMemory("int", levelID, 0x6a9ec0, 0x82c, 0x24)
 
         for i in range(iterations):
             pvz.set_internal_spawn([z for z in IDs])
@@ -56,8 +62,8 @@ class LevelMenu(State):
                 df.loc[i, zombieNames[l]] = zombies.count(val)
 
             preview = []
-            zombiesCountMax = pvz.ReadMemory("unsigned int", 0x6A9EC0, 0x768, 0x94)
-            zombiesOffset = pvz.ReadMemory("unsigned int", 0x6A9EC0, 0x768, 0x90)
+            zombiesCountMax = pvz.ReadMemory("unsigned int", 0x6a9ec0, 0x768, 0x94)
+            zombiesOffset = pvz.ReadMemory("unsigned int", 0x6a9ec0, 0x768, 0x90)
 
             for m in range(zombiesCountMax): # type: ignore
                 zombieDead = pvz.ReadMemory("bool", zombiesOffset + 0xec + m * 0x15c) # type: ignore
