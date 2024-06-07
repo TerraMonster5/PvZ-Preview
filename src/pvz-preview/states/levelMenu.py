@@ -40,7 +40,7 @@ class LevelMenu(State):
         df = pd.DataFrame(index=range(iterations),
                           columns=list(zombieNames+previewNames),
                           dtype=float)
-        
+
         pvz.WriteMemory("int", levelID, 0x6a9ec0, 0x82c, 0x24)
 
         for i in range(iterations):

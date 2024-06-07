@@ -35,7 +35,7 @@ class ZombieSelector(tk.LabelFrame):
 
         self.__cancelIcon = tk.PhotoImage(file="assets/close.png").subsample(4, 4)
     
-    def __addZombie(self, _) -> None:
+    def __addZombie(self, event) -> None:
 
         if self.__free >= self.__max:
             return

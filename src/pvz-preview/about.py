@@ -20,7 +20,7 @@ class About(tk.Toplevel, abstracts.Singleton):
         self.title("About")
         self.resizable(False, False)
 
-        ttk.Label(self, text="Version: 0.1.19").pack()
+        ttk.Label(self, text="Version: 0.1.22").pack()
         ttk.Button(self, text="License", command=lambda: License.show(master=self)).pack()
 
 class License(tk.Toplevel, abstracts.Singleton):
