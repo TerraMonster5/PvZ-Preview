@@ -1,5 +1,6 @@
-from .. import globals as glbls
-from ..states import State
+from . import widgets
+from ... import globals as glbls
+from ...states import State
 
 import math
 import pandas as pd
@@ -37,7 +38,7 @@ class LevelMenu(State):
         zombieNames = [glbls.root.zombieIDs[i] for i in IDs]
         previewNames = list(map(lambda x: "Preview "+x, zombieNames))
 
-        df = pd.DataFrame(index=range(iterations),
+        self.__previews = pd.DataFrame(index=range(iterations),
                           columns=list(zombieNames+previewNames),
                           dtype=float)
 
@@ -59,7 +60,7 @@ class LevelMenu(State):
                         zombies[j * 50 + k] = -1
 
             for l, val in enumerate(IDs):
-                df.loc[i, zombieNames[l]] = zombies.count(val)
+                self.__previews.loc[i, zombieNames[l]] = zombies.count(val)
 
             preview = []
             zombiesCountMax = pvz.ReadMemory("unsigned int", 0x6a9ec0, 0x768, 0x94)
@@ -72,9 +73,13 @@ class LevelMenu(State):
                     preview.append(zombieType) # type: ignore
 
             for n, val in enumerate(IDs):
-                df.loc[i, previewNames[n]] = preview.count(val)
+                self.__previews.loc[i, previewNames[n]] = preview.count(val)
 
         print(i)
-        a = df.groupby(previewNames)
-        print(a.size())
-        print(a.aggregate("mean"))
+        self.__groupedPreviews = self.__previews.groupby(previewNames)
+        print(self.__groupedPreviews.groups.keys())
+        print(self.__groupedPreviews.size())
+        print(self.__groupedPreviews.aggregate("mean"))
+    
+    def __outputResults(self):
+        pass

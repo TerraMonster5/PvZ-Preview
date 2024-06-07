@@ -48,17 +48,17 @@ class ZombieSelector(tk.LabelFrame):
         self.__records[self.__free].append(ttk.Label(self, text=new))
         for _ in range(2):
             self.__records[self.__free].append(ttk.Spinbox(self,
-                                                         from_=0,
-                                                         to=99,
-                                                         increment=1,
-                                                         width=3))
+                                                           from_=0,
+                                                           to=99,
+                                                           increment=1,
+                                                           width=3))
         self.__records[self.__free].append(tk.Button(self,
-                                                   image=self.__cancelIcon,
-                                                   relief="flat",
-                                                   overrelief="flat",
-                                                   bd=0,
-                                                   width=10,
-                                                   command=functools.partial(self.__removeZombie, new)))
+                                                     image=self.__cancelIcon,
+                                                     relief="flat",
+                                                     overrelief="flat",
+                                                     bd=0,
+                                                     width=10,
+                                                     command=functools.partial(self.__removeZombie, new)))
         for col in range(4):
             self.__records[self.__free][col].grid(row=self.__free+1, column=col)
 
