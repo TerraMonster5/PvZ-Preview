@@ -39,8 +39,8 @@ class LevelMenu(State):
         previewNames = list(map(lambda x: "Preview "+x, zombieNames))
 
         self.__previews = pd.DataFrame(index=range(iterations),
-                          columns=list(zombieNames+previewNames),
-                          dtype=float)
+                                       columns=list(zombieNames+previewNames),
+                                       dtype=float)
 
         pvz.WriteMemory("int", levelID, 0x6a9ec0, 0x82c, 0x24)
 
@@ -80,6 +80,6 @@ class LevelMenu(State):
         print(self.__groupedPreviews.groups.keys())
         print(self.__groupedPreviews.size())
         print(self.__groupedPreviews.aggregate("mean"))
-    
-    def __outputResults(self):
-        pass
+
+        self.__filter = widgets.PreviewFilter(self.frame, self.__previews)
+        self.__filter.grid(row=3, column=0, columnspan=2)

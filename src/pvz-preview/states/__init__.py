@@ -40,7 +40,7 @@ class MainMenu(State):
         self.__quitBtn = ttk.Button(self.frame, text="Exit", command=glbls.root.destroy)
         self.__quitBtn.grid(column=0, row=len(self.__adventureBtns)+1)
 
-    def __switchAdventureMenu(self, filename):
+    def __switchAdventureMenu(self, filename: str):
         self.frame.pack_forget()
         glbls.root.zombieIDs = {int(key): value for key, value in self.__jsonDict["zombieIDs"].items()}
         glbls.root.currentState.push(AdventureMenu(filename))

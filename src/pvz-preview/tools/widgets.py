@@ -8,7 +8,7 @@ from tkinter import messagebox
 class ZombieSelector(tk.LabelFrame):
     def __init__(self,
                  master,
-                 options: list=[],
+                 options: list[str]=[],
                  max: int=10,
                  cnf: dict={},
                  **kwargs) -> None:
