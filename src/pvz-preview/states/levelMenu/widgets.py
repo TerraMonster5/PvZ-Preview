@@ -1,4 +1,5 @@
 import pandas as pd
+import copy
 
 import tkinter as tk
 from tkinter import ttk
@@ -23,7 +24,9 @@ class PreviewFilter(tk.LabelFrame):
         self.__groups: list[list[tuple[ttk.Checkbutton, tk.BooleanVar]]] = [[] for _ in range(len(self.__headings))]
 
         byPreviews = frame.groupby(previews)
-        self.__byPreviewsGroups = byPreviews.groups.keys()
+        groups = list(byPreviews.groups.keys())
+
+        self.__byPreviewsGroups: list = copy.deepcopy(groups)
 
         print(zombs, previews)
 
@@ -44,24 +47,22 @@ class PreviewFilter(tk.LabelFrame):
         for e, col in enumerate(self.__groups):
             for f, tup in enumerate(col, 1):
                 tup[0].grid(row=f, column=e)
-
-        print(self.__groups)
     
     def __updateCheckbuttons(self):
         for _, col in enumerate(self.__groups):
             for _, tup in enumerate(col, 1):
                 tup[0].grid_forget()
         
-        checked: list = [-1 for _ in range(4)]
+        checked: list = [-1 for _ in range(len(self.__groups))]
 
         for i, col in enumerate(self.__groups):
             for _, tup in enumerate(col, 1):
                 if tup[1].get():
                     checked[i] = int(tup[0].cget("text"))
-        
-        # checked = [-1, 1, -1, 2]
-        # self.__byPreviewsGroups = [[2, 1, 3, 2], [1, 2, 2, 2]]
 
-        for i, col in enumerate(self.__groups):
-            for e, tup in enumerate(col, 1):
-                pass
+        self.__byPreviewsGroups: list = [group for group in self.__byPreviewsGroups if all(checked[e] == group[e] or checked[e] == -1 for e in range(len(group)))]
+
+        for f, col in enumerate(self.__groups):
+            for g, tup in enumerate(col, 1):
+                if any(int(tup[0].cget("text")) == group[f] for group in self.__byPreviewsGroups):
+                    tup[0].grid(row=g, column=f)
