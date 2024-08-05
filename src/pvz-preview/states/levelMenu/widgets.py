@@ -24,9 +24,7 @@ class PreviewFilter(tk.LabelFrame):
         self.__groups: list[list[tuple[ttk.Checkbutton, tk.BooleanVar]]] = [[] for _ in range(len(self.__headings))]
 
         byPreviews = frame.groupby(previews)
-        groups = list(byPreviews.groups.keys())
-
-        self.__byPreviewsGroups: list = copy.deepcopy(groups)
+        self.__byPreviewsGroups = list(byPreviews.groups.keys())
 
         print(zombs, previews)
 
@@ -49,10 +47,6 @@ class PreviewFilter(tk.LabelFrame):
                 tup[0].grid(row=f, column=e)
     
     def __updateCheckbuttons(self):
-        for _, col in enumerate(self.__groups):
-            for _, tup in enumerate(col, 1):
-                tup[0].grid_forget()
-        
         checked: list = [-1 for _ in range(len(self.__groups))]
 
         for i, col in enumerate(self.__groups):
@@ -60,9 +54,11 @@ class PreviewFilter(tk.LabelFrame):
                 if tup[1].get():
                     checked[i] = int(tup[0].cget("text"))
 
-        self.__byPreviewsGroups: list = [group for group in self.__byPreviewsGroups if all(checked[e] == group[e] or checked[e] == -1 for e in range(len(group)))]
+        groups: list = [group for group in self.__byPreviewsGroups if all(checked[e] == group[e] or checked[e] == -1 for e in range(len(group)))]
 
         for f, col in enumerate(self.__groups):
             for g, tup in enumerate(col, 1):
-                if any(int(tup[0].cget("text")) == group[f] for group in self.__byPreviewsGroups):
-                    tup[0].grid(row=g, column=f)
+                if any(int(tup[0].cget("text")) == group[f] for group in groups):
+                    tup[0].state(["!disabled"])
+                else:
+                    tup[0].state(["disabled"])
