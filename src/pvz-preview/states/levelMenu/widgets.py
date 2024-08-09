@@ -5,10 +5,10 @@ import tkinter as tk
 from tkinter import ttk
 
 class PreviewFilter(tk.LabelFrame):
-    def __init__(self, master, frame: pd.DataFrame, cnf: dict={}, **kwargs):
+    def __init__(self, master, frame: pd.DataFrame, label: str, cnf: dict={}, **kwargs):
         kwargs = cnf or kwargs
 
-        self.__label = ttk.Label(master, text="Filter")
+        self.__label = ttk.Label(master, text=label)
 
         super().__init__(master, labelwidget=self.__label, **kwargs)
 

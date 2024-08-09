@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0" version="24.7.6">
+  <diagram name="Page-1" id="CFs5QFbM32Fo7Rs_uSya">
+    <mxGraphModel dx="1181" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-2" value="Back" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="50" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-3" value="Entry (int)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="90" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="40" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-5" value="Repeat Until Found" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fontSize=10;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="40" width="90" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-6" value="Filter / Selector" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="80" y="60" width="440" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-9" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="260" width="440" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-10" value="Results" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-11" value="Table, includes: mean/median/mode of appearances of each zombie type&lt;div&gt;number of times preview appeared out of total simulations&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="90" y="280" width="420" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-12" value="Clear" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="500" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="440" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GTjBABW4gH7Yiwn1Qnom-14" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="440" width="160" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

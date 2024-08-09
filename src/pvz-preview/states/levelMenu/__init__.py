@@ -4,8 +4,10 @@ from ...states import State
 
 import math
 import pandas as pd
+import threading
 
 from tkinter import ttk
+from tkinter import messagebox
 
 class LevelMenu(State):
     def __init__(self, level: dict) -> None:
@@ -25,7 +27,21 @@ class LevelMenu(State):
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
         self.__backBtn.grid(column=0, row=2, columnspan=2)
 
+        self.__clearBtn = ttk.Button(self.frame, text="Clear Results", command=self.__clearResults)
+
     def __runSim(self) -> None:
+        self.__startBtn.state(["disabled"])
+        self.__clearBtn.grid_forget()
+
+        try:
+            self.__filter.destroy()
+        except AttributeError:
+            pass
+
+        self.__simThread = threading.Thread(target=self.__simulation, daemon=True)
+        self.__simThread.start()
+
+    def __simulation(self) -> None:
         import pvz
 
         name = self.__level["name"]
@@ -45,6 +61,8 @@ class LevelMenu(State):
         pvz.WriteMemory("int", levelID, 0x6a9ec0, 0x82c, 0x24)
 
         for i in range(iterations):
+            # if cancel: break
+
             pvz.set_internal_spawn([z for z in IDs])
             pvz.Sleep(2)
 
@@ -81,5 +99,19 @@ class LevelMenu(State):
         print(self.__groupedPreviews.size())
         print(self.__groupedPreviews.aggregate("mean"))
 
-        self.__filter = widgets.PreviewFilter(self.frame, self.__previews)
+        self.__filter = widgets.PreviewFilter(self.frame, self.__previews, label="Filter")
         self.__filter.grid(row=3, column=0, columnspan=2)
+
+        self.__clearBtn.grid(column=0, row=4, columnspan=2)
+        self.__startBtn.state(["!disabled"])
+    
+    def __clearResults(self) -> None:
+        if messagebox.askokcancel("Continue?", message="Do you wish to continue? (Results will be deleted permanently!)"):
+            self.__filter.destroy()
+            self.__clearBtn.grid_forget()
+    
+    def _switchBack(self) -> None:
+        if self.__simThread.is_alive():
+            messagebox.showwarning(message="Please wait for simulation to conclude!")
+            return
+        super()._switchBack()
