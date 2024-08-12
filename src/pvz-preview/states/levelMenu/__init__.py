@@ -93,13 +93,15 @@ class LevelMenu(State):
             for n, val in enumerate(IDs):
                 self.__previews.loc[i, previewNames[n]] = preview.count(val)
 
-        print(i)
         self.__groupedPreviews = self.__previews.groupby(previewNames)
-        print(self.__groupedPreviews.groups.keys())
         print(self.__groupedPreviews.size())
         print(self.__groupedPreviews.aggregate("mean"))
 
-        self.__filter = widgets.PreviewFilter(self.frame, self.__previews, label="Filter")
+        columns = self.__previews.columns.values.tolist()
+        previews = columns[len(columns)//2::]
+
+        self.__filter = widgets.PreviewFilter(self.frame, label="Filter", columns=columns,
+                                              groupedValues=self.__previews.groupby(previews).groups.keys())
         self.__filter.grid(row=3, column=0, columnspan=2)
 
         self.__clearBtn.grid(column=0, row=4, columnspan=2)

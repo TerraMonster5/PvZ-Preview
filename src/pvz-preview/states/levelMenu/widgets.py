@@ -1,11 +1,8 @@
-import pandas as pd
-import copy
-
 import tkinter as tk
 from tkinter import ttk
 
 class PreviewFilter(tk.LabelFrame):
-    def __init__(self, master, frame: pd.DataFrame, label: str, cnf: dict={}, **kwargs):
+    def __init__(self, master, label: str, columns: list[str], groupedValues: list, cnf: dict={}, **kwargs):
         kwargs = cnf or kwargs
 
         self.__label = ttk.Label(master, text=label)
@@ -14,7 +11,6 @@ class PreviewFilter(tk.LabelFrame):
 
         self.__headings: list[ttk.Label] = []
 
-        columns = frame.columns.values.tolist()
         mid = len(columns)//2
         zombs = columns[:mid:]
         previews = columns[mid::]
@@ -23,10 +19,7 @@ class PreviewFilter(tk.LabelFrame):
 
         self.__groups: list[list[tuple[ttk.Checkbutton, tk.BooleanVar]]] = [[] for _ in range(len(self.__headings))]
 
-        byPreviews = frame.groupby(previews)
-        self.__byPreviewsGroups = list(byPreviews.groups.keys())
-
-        print(zombs, previews)
+        self.__byPreviewsGroups: list = groupedValues
 
         options = {z: set() for z in zombs}
         for grp in self.__byPreviewsGroups:
