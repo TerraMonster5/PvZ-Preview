@@ -113,7 +113,7 @@ class LevelMenu(State):
             self.__clearBtn.grid_forget()
     
     def _switchBack(self) -> None:
-        if self.__simThread.is_alive():
+        if hasattr(self, "__simThread") and self.__simThread.is_alive():
             messagebox.showwarning(message="Please wait for simulation to conclude!")
             return
         super()._switchBack()
