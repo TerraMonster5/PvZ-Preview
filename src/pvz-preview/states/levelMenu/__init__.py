@@ -6,6 +6,7 @@ import math
 import pandas as pd
 import threading
 
+import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
@@ -16,16 +17,20 @@ class LevelMenu(State):
         self.__level = level
 
         self.__title = ttk.Label(self.frame, text=level["name"])
-        self.__title.grid(column=0, row=0, columnspan=2)
+        self.__title.grid(column=0, row=0, columnspan=6)
 
         self.__iterations = ttk.Spinbox(self.frame, from_=1, to=math.inf, increment=1)
-        self.__iterations.grid(column=0, row=1)
+        self.__iterations.grid(column=0, row=1, columnspan=2)
+
+        self.__untilFound = tk.BooleanVar()
+        self.__untilFoundCheck = ttk.Checkbutton(self.frame, text="Repeat Until Found", variable=self.__untilFound)
+        self.__untilFoundCheck.grid(column=2, row=1, columnspan=2)
 
         self.__startBtn = ttk.Button(self.frame, text="Start", command=self.__runSim)
-        self.__startBtn.grid(column=1, row=1)
+        self.__startBtn.grid(column=4, row=1, columnspan=2)
 
         self.__backBtn = ttk.Button(self.frame, text="Back", command=self._switchBack)
-        self.__backBtn.grid(column=0, row=2, columnspan=2)
+        self.__backBtn.grid(column=0, row=2, columnspan=6)
 
         self.__clearBtn = ttk.Button(self.frame, text="Clear Results", command=self.__clearResults)
 
@@ -102,9 +107,9 @@ class LevelMenu(State):
 
         self.__filter = widgets.PreviewFilter(self.frame, label="Filter", columns=columns,
                                               groupedValues=self.__previews.groupby(previews).groups.keys())
-        self.__filter.grid(row=3, column=0, columnspan=2)
+        self.__filter.grid(row=3, column=0, columnspan=6)
 
-        self.__clearBtn.grid(column=0, row=4, columnspan=2)
+        self.__clearBtn.grid(column=0, row=4, columnspan=6)
         self.__startBtn.state(["!disabled"])
     
     def __clearResults(self) -> None:
