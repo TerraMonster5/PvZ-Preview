@@ -23,7 +23,7 @@ class LevelMenu(State):
         self.__iterations.grid(column=0, row=1, columnspan=2)
 
         self.__untilFound = tk.BooleanVar()
-        self.__untilFoundCheck = ttk.Checkbutton(self.frame, text="Repeat Until Found", variable=self.__untilFound)
+        self.__untilFoundCheck = ttk.Checkbutton(self.frame, text="Repeat Until Found", variable=self.__untilFound, command=self.__untilFoundToggle)
         self.__untilFoundCheck.grid(column=2, row=1, columnspan=2)
 
         self.__startBtn = ttk.Button(self.frame, text="Start", command=self.__runSim)
@@ -33,6 +33,12 @@ class LevelMenu(State):
         self.__backBtn.grid(column=0, row=2, columnspan=6)
 
         self.__clearBtn = ttk.Button(self.frame, text="Clear Results", command=self.__clearResults)
+    
+    def __untilFoundToggle(self) -> None:
+        if self.__untilFound.get():
+            self.__iterations.state(["disabled"])
+        else:
+            self.__iterations.state(["!disabled"])
 
     def __runSim(self) -> None:
         self.__startBtn.state(["disabled"])
